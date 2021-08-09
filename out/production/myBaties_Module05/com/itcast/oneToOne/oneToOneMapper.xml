@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--namespace:命名空间-->
+<mapper namespace="com.itcast.mapper.CardMapper">
+    <!--resultMap：表中字段与实体对象属性的映射关系-->
+    <resultMap id="oneToOne" type="card">
+        <id column="id" property="id"/>
+        <result column="num" property="num"/>
+        <!--property:被包含的对象的变量名-->
+        <!--javaType：被包含对象的实际类型-->
+        <association property="p" javaType="person">
+            <id column="pid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="oneToOne">
+         SELECT c.`id`,c.num,p.id pid,p.name,p.age FROM card c,person p WHERE c.`id`=p.cid;
+    </select>
+</mapper>

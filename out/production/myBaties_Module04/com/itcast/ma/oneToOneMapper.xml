@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itcast.mapper.CardMapper">
+
+    <resultMap id="oneToOne" type="card">
+        <id column="cid" property="id"/>
+        <result column="cnum" property="num"/>
+        <association property="p" javaType="person">
+            <id column="pid" property="id"/>
+            <result column="pname" property="name"/>
+            <result column="page" property="age"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultMap="oneToOne">
+       SELECT c.id cid,c.num cnum,p.id pid,p.name pname,p.age page FROM card  c,person p WHERE c.id=p.cid;
+   </select>
+
+</mapper>

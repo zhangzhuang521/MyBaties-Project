@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.mapper.SubjectMapper">
+    <resultMap id="manyToMany" type="subject">
+        <id column="id" property="id"/>
+        <result column="num" property="num"/>
+        <!--property:被包含的对象的变量名-->
+        <!--javaType：被包含对象的实际类型-->
+        <collection property="students" ofType="student">
+            <id column="stid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="manyToMany">
+        SELECT su.id,su.num,st.id stid,st.name,st.age FROM subject su,student st,st_su ss WHERE su.id=ss.`suid` AND st.id=ss.`stid`;
+    </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件-->
+<!--ma ：映射根标签
+namespace ：命名空间
+-->
+<mapper namespace="com.itheima.mapper.StudentMapper">
+    <!--sql语句的抽取-->
+    <sql id="refsql">
+        SELECT  * FROM student
+    </sql>
+    <!--1.查询所有-->
+    <select id="findAll" resultType="student">
+        <include refid="refsql"/>
+    </select>
+    <!--2.根据id查询-->
+    <!--parameterType:参数映射类型-->
+    <!--resultType ：结果对象映射类型-->
+    <select id="findById" parameterType="int" resultType="student">
+        <include refid="refsql"/>
+        <where>
+            id=#{id}
+        </where>
+    </select>
+    <!--3.添加-->
+    <insert id="insert" parameterType="student">
+        insert into student values (#{id},#{name},#{age})
+    </insert>
+    <!--4.修改-->
+    <update id="update" parameterType="student">
+        update student set name=#{name},age=#{age} where id=#{id}
+    </update>
+    <!--5.删除-->
+    <delete id="delete" parameterType="int">
+        delete from student where id=#{id}
+    </delete>
+    <!--6.根据多条件查询-->
+    <select id="findContion" parameterType="student" resultType="student">
+        <include refid="refsql"/>
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="age!=null">
+                and age=#{age}
+            </if>
+        </where>
+    </select>
+    <!--7.根绝多个id查询-->
+    <select id="findByIds" parameterType="list" resultType="student">
+        <include refid="refsql"/>
+        <where>
+            <foreach collection="list" open="id IN (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>
+        <!--动态接口代理的四大规则：-->
+        <!--1.namespace命名空间需要与代理接口的全类型一样-->
+        <!--2.id与代理接口中的方法对应一致-->
+        <!--3.参数对象映射类型与方法中的参数类型一致-->
+        <!--4.结果对象映射类型与方法中的返回值类型一致-->

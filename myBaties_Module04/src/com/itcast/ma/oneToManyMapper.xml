@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.mapper.ClassesMapper">
+    <resultMap id="oneToMany" type="classes">
+        <id column="cid" property="id"/>
+        <result column="cnum" property="num"/>
+        <collection property="students" ofType="student">
+            <id column="sid" property="id"/>
+            <result column="sname" property="name"/>
+            <result column="sage" property="age"/>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="oneToMany">
+        SELECT c.id cid,c.`num` cnum,s.id sid,s.name sname,s.age sage FROM classes c,student s WHERE c.`id`=s.`sid`
+    </select>
+</mapper>

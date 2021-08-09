@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--ma：映射配置文件
+namespace：命名空间-->
+<mapper namespace="com.itcast.ma.StudentMapper">
+    <!--sql语句的抽取-->
+    <sql id="refSQL">
+        select * from student
+    </sql>
+    <!--  select 查询语句
+      id：唯一的标识
+      resultType：返回结果集数据类型
+      -->
+    <!--查询全部-->
+    <select id="findAll" resultType="student">
+        <include refid="refSQL"/>
+    </select>
+
+    <select id="findById" resultType="student" parameterType="int">
+        <include refid="refSQL"/>
+        <where>
+            id=#{id}
+        </where>
+    </select>
+</mapper>

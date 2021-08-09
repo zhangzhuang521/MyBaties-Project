@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.mapper.ClassesMapper">
+    <resultMap id="oneToMany" type="classes">
+        <id column="id" property="id"/>
+        <result column="num" property="num"/>
+        <!--property:被包含的对象的变量名-->
+        <!--javaType：被包含对象的实际类型-->
+        <collection property="students" ofType="student">
+            <id column="sid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="oneToMany">
+        SELECT c.id,c.`num`,s.id sid,s.`NAME` ,s.age FROM classes c,student s WHERE c.`id`=s.`sid`;
+    </select>
+</mapper>

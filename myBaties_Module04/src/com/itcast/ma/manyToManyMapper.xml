@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itcast.mapper.SubjectMapper">
+    <resultMap id="manToMany" type="subject">
+        <id column="suid" property="id"/>
+        <result column="sunum" property="num"/>
+        <collection property="students" ofType="student">
+            <id column="stid" property="id"/>
+            <result column="stname" property="name"/>
+            <result column="stage" property="age"/>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="manToMany">
+SELECT su.`id` suid,su.`num` sunum,st.`id` stid,st.`NAME` stname,st.`age` stage FROM student st,subject su,st_su ss WHERE st.id=ss.`stid` AND su.id=ss.`suid`;
+    </select>
+</mapper>

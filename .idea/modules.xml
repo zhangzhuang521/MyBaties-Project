@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module01/myBaties_Module01.iml" filepath="$PROJECT_DIR$/myBaties_Module01/myBaties_Module01.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module02/myBaties_Module02.iml" filepath="$PROJECT_DIR$/myBaties_Module02/myBaties_Module02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module03/myBaties_Module03.iml" filepath="$PROJECT_DIR$/myBaties_Module03/myBaties_Module03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module04/myBaties_Module04.iml" filepath="$PROJECT_DIR$/myBaties_Module04/myBaties_Module04.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module05/myBaties_Module05.iml" filepath="$PROJECT_DIR$/myBaties_Module05/myBaties_Module05.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module06/myBaties_Module06.iml" filepath="$PROJECT_DIR$/myBaties_Module06/myBaties_Module06.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myBaties_Module07/myBaties_Module07.iml" filepath="$PROJECT_DIR$/myBaties_Module07/myBaties_Module07.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--ma：映射配置文件
+namespace：命名空间-->
+<mapper namespace="com.itcast.ma.StudentMapper">
+    <!--sql语句的抽取-->
+    <sql id="refSQL">
+        select * from student
+    </sql>
+    <!--  select 查询语句
+      id：唯一的标识
+      resultType：返回结果集数据类型
+      -->
+    <!--查询全部-->
+    <select id="findAll" resultType="student">
+        <include refid="refSQL"/>
+    </select>
+
+    <select id="findById" resultType="student" parameterType="int">
+        select * from student where id=#{id}
+    </select>
+    <!--添加-->
+    <insert id="insert" parameterType="student">
+       insert into student values(#{id},#{name},#{age})
+    </insert>
+    <!--修改-->
+    <update id="update" parameterType="student">
+        update student set name=#{name},age=#{age} where id=#{id}
+    </update>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        delete  from student where id=#{id}
+    </delete>
+
+    <!--根据多条件查询-->
+    <select id="findContion" resultType="student" parameterType="student">
+        <include refid="refSQL"/>
+        <where>
+            <if test="id!=null">
+                id=#{id}
+            </if>
+            <if test="name!=null">
+                and name=#{name}
+            </if>
+            <if test="id!=null">
+                and age=#{age}
+            </if>
+        </where>
+    </select>
+
+    <!--根据多个id查询-->
+    <select id="findByIds" resultType="student" parameterType="list">
+        <include refid="refSQL"/>
+        <where>
+            <foreach collection="list"  open="id IN (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+</mapper>
